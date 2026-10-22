@@ -6,6 +6,8 @@
 
 **第一阶段开发验证版，非正式记账版本。** 用户已授权通过 `codex/stage1-download` 分支与 GitHub Actions 分发。下载包附有 [版本说明](docs/stage-1-build-notes.md)、源码提交和校验值；构建是否成功须查看对应运行记录。
 
+首个 GitHub 构建已成功并上传安装包：[打开下载区域](https://github.com/YIDU0/repository-of-codex/actions/runs/39732332051#artifacts)。登录 GitHub 后，下载 `worktime-journal-stage1-debug`，解压取得 APK 和说明；产物保留 7 天。
+
 需求与开发方案已获确认，正在执行阶段 1。已建立 Flutter 双端工程、奶油手账风页面骨架和开发版平台验证工具，**尚未实现正式工时与工资功能**。
 
 完整 SDK 与 Android 开发版 APK 已构建，静态分析和 5 项共享代码测试已通过。AOT 包在软件模拟器安装并呈现页面；系统 UI 自动化连接超时，设备功能检查未通过，阶段 1 尚未完整验收。iOS 尚未构建或真机验证。实际状态以阶段记录为准。

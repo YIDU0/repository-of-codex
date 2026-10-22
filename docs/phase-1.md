@@ -21,10 +21,14 @@
 | Android AOT 验证构建 | API 36 x64 profile APK 构建通过，已安装并显示真实应用页面 |
 | Android UI 平台检查 | 失败：UIAutomator 未能读回页面，报告 0 项功能通过；实际截图显示应用已正常呈现，不能据此代替文件、数据库和通知的设备验收 |
 | 原生 Dart 集成用例 | 4 项未执行：JIT 测试 APK 安装失败，不能报告通过 |
+| GitHub Actions | [运行 #1](https://github.com/YIDU0/repository-of-codex/actions/runs/39732332051) 成功，来源 `b0d27cca5a4980b09dfa38ff69ed177b8417110c`；格式、分析、共享测试、Android 构建及产物上传步骤全部完成 |
+| GitHub 下载产物 | `worktime-journal-stage1-debug` 已上传，页面显示 92.1 MB，保留 7 天；包含 APK、SHA-256、构建来源及中文版本说明 |
 | Android 真机 | 未安装或验证 |
 | iOS | 工程已生成；未编译、签名或真机验证 |
 
 本次最终共享检查日志：`/workspace/.toolchains/logs/final-shared-checks.log`。Android 构建与设备操作分别记录在 `final-android-build.log`、`profile-apk-build.log`、`profile-ui-smoke.log`；`ui-logcat.txt` 保存系统 UIAutomation 连接超时及媒体/电话系统服务启动 ANR 的原始证据。这些是当前工作区证据，不假定远端 CI 或新环境恢复已运行。
+
+远端结果另以上表链接为证：运行状态 Success，总时长 5 分 24 秒，产物数 1。GitHub 显示的产物摘要为 `sha256:7edc2631a637414ee29b40f4d1d7b26b220b131ed137b00d7204bb95ffe5194d`；这是 Actions 产物摘要，不是包内 APK 的独立校验值，APK 应核对随包的 `SHA256SUMS.txt`。公开页面可看到产物，实际下载通常需要登录 GitHub；尚未取得用户客户端已下载或手机已安装的反馈。
 
 ## 设备验证方法与限制
 

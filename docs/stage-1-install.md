@@ -16,6 +16,8 @@
 
 工程推送并构建成功后：
 
+已成功构建并上传的首个版本：[打开运行 #1 的下载区域](https://github.com/YIDU0/repository-of-codex/actions/runs/39732332051#artifacts)，来源提交 `b0d27cc`。这是第一阶段开发验证版，业务和设备验收限制见随包的版本说明。
+
 1. 打开 GitHub 仓库的 **Actions → Flutter quality**，选择对应分支、提交的运行记录。
 2. 等待检查和构建成功。在运行详情底部 **Artifacts** 下载 `worktime-journal-stage1-debug`；下载时通常需要登录有权访问该仓库的 GitHub 账号。
 3. 解压下载的 ZIP，获得 `worktime-journal-stage1-debug.apk`、`SHA256SUMS.txt`、`BUILD_INFO.txt` 和 `版本说明.md`，阅读说明后再将 APK 传入安卓手机。构建产物保留 7 天，过期后需重新构建。

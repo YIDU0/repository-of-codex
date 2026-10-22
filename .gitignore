@@ -1,0 +1,41 @@
+# Flutter and Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+coverage/
+**/doc/api/
+
+# Machine-specific tools and configuration
+.toolchains/
+.local/
+.idea/
+*.iml
+android/local.properties
+android/.gradle/
+android/key.properties
+*.jks
+*.keystore
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/ephemeral/
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+ios/Runner/GeneratedPluginRegistrant.*
+ios/Runner.xcworkspace/xcuserdata/
+**/xcuserdata/
+
+# Local outputs
+artifacts/
+*.log
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+/core
+/core.[0-9]*
+__pycache__/
+*.pyc
+.DS_Store
+
+# The application pubspec.lock will be committed once dependency resolution succeeds.

@@ -1,0 +1,5 @@
+**
+!tool/
+!tool/docker/
+!tool/docker/Dockerfile
+!tool/docker/entrypoint.sh

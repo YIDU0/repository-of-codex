@@ -1,0 +1,65 @@
+name: Flutter quality
+run-name: Stage 1 developer build · ${{ github.ref_name }}
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  android-and-tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      WORKTIME_TOOLCHAINS: ${{ github.workspace }}/../.toolchains
+      ANDROID_HOME: ${{ github.workspace }}/../.toolchains/android-sdk
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Install pinned tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          export JAVA_HOME="${JAVA_HOME_21_X64:?JDK 21 must be available}"
+          echo "JAVA_HOME=$JAVA_HOME" >> "$GITHUB_ENV"
+          echo "$JAVA_HOME/bin" >> "$GITHUB_PATH"
+          source scripts/env.sh
+          python3 scripts/bootstrap_android.py
+          python3 scripts/bootstrap_flutter.py
+      - name: Format, analyze and test
+        run: bash scripts/check.sh
+      - name: Build Stage 1 Android developer package
+        shell: bash
+        run: |
+          set -euo pipefail
+          source scripts/env.sh
+          flutter build apk --debug --target lib/main.dart --dart-define=ENABLE_PLATFORM_PROBES=true
+      - name: Package development notes and build provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/stage1
+          cp build/app/outputs/flutter-apk/app-debug.apk artifacts/stage1/worktime-journal-stage1-debug.apk
+          cp docs/stage-1-build-notes.md artifacts/stage1/版本说明.md
+          printf 'SOURCE_COMMIT=%s\nBRANCH=%s\nWORKFLOW_RUN=%s\n' \
+            "$(git rev-parse HEAD)" "$GITHUB_REF_NAME" \
+            "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" \
+            > artifacts/stage1/BUILD_INFO.txt
+          (cd artifacts/stage1 && sha256sum worktime-journal-stage1-debug.apk > SHA256SUMS.txt)
+          cat docs/stage-1-build-notes.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload Android developer package
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: worktime-journal-stage1-debug
+          path: |
+            artifacts/stage1/worktime-journal-stage1-debug.apk
+            artifacts/stage1/SHA256SUMS.txt
+            artifacts/stage1/BUILD_INFO.txt
+            artifacts/stage1/版本说明.md
+          if-no-files-found: error
+          compression-level: 6
+          retention-days: 7
